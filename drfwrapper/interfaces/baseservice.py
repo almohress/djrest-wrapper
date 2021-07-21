@@ -8,9 +8,10 @@ class BaseService(object):
     def __init__(self, model: BaseModel):
         if model != None:
             self.model = model
-            # id is a default field, so we should remove it
+            self.fields = [f.name for f in model._meta.get_fields()]
             try:
-                self.fields = model._meta.get_fields().remove('id')
+                # id is a default field, so we should remove it
+                self.fields.remove('id')
             except Exception as e:
                 pass
         else:
