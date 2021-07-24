@@ -1,4 +1,4 @@
-from drf_wrapper.interfaces import BaseService
+from djrest_wrapper.interfaces import BaseService
 
 
 class ExampleService(BaseService):

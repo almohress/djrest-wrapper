@@ -1,5 +1,5 @@
 from django.db import models
-from drf_wrapper.interfaces import BaseModel
+from djrest_wrapper.interfaces import BaseModel
 
 
 class ExampleModel(BaseModel):
