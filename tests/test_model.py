@@ -1,6 +1,6 @@
 from uuid import UUID
 from django.test import TestCase
-from .models import ExampleModel
+from tests.models import ExampleModel
 
 
 class ExampleModelTestCase(TestCase):

@@ -1,6 +1,6 @@
 from django.test import TestCase
-from .models import ExampleModel
-from .service import ExampleService
+from tests.models import ExampleModel
+from tests.service import ExampleService
 
 
 class ExampleServiceTestCase(TestCase):
