@@ -51,7 +51,7 @@ lint: ## check style with flake8
 	flake8 drf_wrapper tests
 
 test: ## run tests quickly with the default Python
-	python setup.py test
+	python manage.py test
 
 test-all: ## run tests on every Python version with tox
 	tox
