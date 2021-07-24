@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from drfwrapper.exceptions.apis.errors import *
+from drf_wrapper.exceptions.apis.errors import *
 from tests.models import ExampleModel
 
 

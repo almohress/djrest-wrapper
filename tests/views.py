@@ -1,4 +1,4 @@
-from drfwrapper.interfaces import BaseViewSet
+from drf_wrapper.interfaces import BaseViewSet
 from .models import ExampleModel
 from .service import ExampleService
 from .serializers import ExampleResSerializer, ExmapleReqSerializer
