@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.core.exceptions import PermissionDenied
-from rest_framework.exceptions import MethodNotAllowed, NotAcceptable, APIException
+from rest_framework.exceptions import MethodNotAllowed, NotAcceptable 
+from .apis.base import BaseApiExp
 from rest_framework.response import Response
 from rest_framework.views import set_rollback
 from . import apis as apiexp
@@ -16,7 +17,7 @@ def exception_handler(exc, context):
     elif isinstance(exc, NotAcceptable):
         exc = apiexp.NotAcceptableExp(exc.default_detail)
 
-    if isinstance(exc, APIException):
+    if isinstance(exc, BaseApiExp):
         headers = {}
         if getattr(exc, 'auth_header', None):
             headers['WWW-Authenticate'] = exc.auth_header
