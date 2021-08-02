@@ -52,7 +52,11 @@ class ExampleServiceTestCase(TestCase):
     def test_list_model(self):
         service = ExampleService(ExampleModel)
         count = 5
-        for i in range(count):
-            service.create_model({'text': f'model {count}'})
+        instances = []
+        for i in range(0,count):
+            instance=service.create_model({'text': f'model {i}'})
+            self.assertIsNotNone(instance)
+            instances.append(instance)
+        self.assertIsNotNone(instances)
         listed = service.list_model()
         self.assertEqual(len(listed), count)
