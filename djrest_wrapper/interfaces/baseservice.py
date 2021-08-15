@@ -27,10 +27,8 @@ class BaseService(object):
 
     def create_model(self, fields: dict):
         try:
-            model = self.model(**fields)
-            model.save()
-            model.refresh_from_db()
-            return model
+           model = self.model.objects.get_or_create(**fields)
+           return model[0]
         except IntegrityError:
             raise apiexp.DuplicateModelExp(
                 f'This {self.model.__name__} is already exists.')
