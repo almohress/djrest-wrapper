@@ -1,12 +1,11 @@
 from rest_framework.viewsets import GenericViewSet
 from ..paginations import DefaultPagination
-from ..decorators import *
+from .mixins import CreateMixin, RetrieveMixin, UpdateMixin, ListMixin, DestroyMixin
 
 
-class BaseViewSet(GenericViewSet):
+class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListMixin, DestroyMixin):
     serializer_action_classes = {}
     permission_action_classes = {}
-    service = None
     page_size = 10
     page_result_key = None
     pagination_class = DefaultPagination
@@ -45,24 +44,9 @@ class BaseViewSet(GenericViewSet):
                 self._paginator.page_result_key = self.page_result_key
         return self._paginator
 
-    @serializer_validation
-    @create_model
-    def create(self, request, *args, **kwargs):
-        pass
-
-    @retrieve_model
-    def retrieve(self, request, pk, *args, **kwargs):
-        pass
-
-    @serializer_validation
-    @update_model
-    def update(self, request, pk, *args, **kwargs):
-        pass
-
-    @list_model
-    def list(self, request, *args, **kwargs):
-        pass
-
-    @delete_model
-    def destroy(self, request, *args, **kwargs):
-        pass
+    def get_queryset(self):
+        if self.action == 'list':
+            qs = self.queryset.all()
+            return qs
+        else:
+            return super().get_queryset()
