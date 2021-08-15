@@ -5,6 +5,7 @@ from .serializers import ExampleResSerializer, ExmapleReqSerializer
 
 
 class ExampleViewSet(BaseViewSet):
+    queryset = ExampleModel.objects
     service = ExampleService(ExampleModel)
     serializer_action_classes = {
         'create': {
@@ -22,4 +23,4 @@ class ExampleViewSet(BaseViewSet):
             'res': ExampleResSerializer
         },
     }
-    page_result_key = 'example'
+    page_result_key = 'examples'
