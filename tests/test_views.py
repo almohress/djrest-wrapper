@@ -37,3 +37,21 @@ class ExampleAPITestCase(APITestCase):
 
         self.assertEqual(response.json().get('err_code'),
                          errors.ERR_INPUT_VALIDATION)
+
+    def test_list_example(self):
+        for i in range(20):
+            ExampleModel.objects.create(text=f'model number {i}')
+
+        url = reverse('example-list')
+        response = self.client.get(path=url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        total_pages = response.json().get('data').get('page').get('total_pages')
+        for i in range(1, total_pages+1):
+            models = response.json().get('data').get('examples')
+            self.assertIsInstance(models, list)
+            next_page = response.json().get('data').get('page').get('next')
+            if next_page != None:
+                response = self.client.get(path=next_page)
+            else:
+                break
