@@ -19,9 +19,10 @@ class ExampleAPITestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        self.assertIsNotNone(response.json().get('examplemodel', None))
+        self.assertIsNotNone(response.json().get(
+            'data').get('examplemodel', None))
 
-        id = response.json().get('examplemodel').get('id')
+        id = response.json().get('data').get('examplemodel').get('id')
         self.assertIsNotNone(ExampleModel.objects.get(id=id))
 
     def test_create_example_failure(self):

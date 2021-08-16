@@ -49,7 +49,8 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'djrest_wrapper.exceptions.handler.exception_handler'
+    'EXCEPTION_HANDLER': 'djrest_wrapper.exceptions.handler.exception_handler',
+    'DEFAULT_RENDERER_CLASSES': ['djrest_wrapper.renderers.defaultjson.DefaultJsonRenderer']
 }
 
 WSGI_APPLICATION = 'config.wsgi.application'
