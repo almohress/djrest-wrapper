@@ -1,9 +1,10 @@
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
-
+from ..decorators import serializer_validation
 
 class CreateMixin(mixins.CreateModelMixin):
+    @serializer_validation
     def create(self, request, *args, **kwargs):
         reqser = self.get_serializer(data=request.data)
         reqser.is_valid(raise_exception=True)
@@ -16,6 +17,7 @@ class CreateMixin(mixins.CreateModelMixin):
 
 
 class UpdateMixin(mixins.UpdateModelMixin):
+    @serializer_validation
     def update(self, request, pk, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()

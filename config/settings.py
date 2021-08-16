@@ -48,6 +48,10 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'djrest_wrapper.exceptions.handler.exception_handler'
+}
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
