@@ -61,3 +61,8 @@ class UserInactiveExp(BaseApiExp):
 class ValidationErrorExp(BaseApiExp):
     err_code = ERR_INPUT_VALIDATION
     status_code = HTTP_400_BAD_REQUEST
+
+
+class ConflictErrorExp(BaseApiExp):
+    err_code = ERR_CONFLICT
+    status_code = HTTP_409_CONFLICT
