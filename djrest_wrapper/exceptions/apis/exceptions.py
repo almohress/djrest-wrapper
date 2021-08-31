@@ -18,11 +18,6 @@ class DuplicateModelExp(BaseApiExp):
     status_code = HTTP_400_BAD_REQUEST
 
 
-class InvalidCredentialsExp(BaseApiExp):
-    err_code = ERR_INVALID_CREDENTIALS
-    status_code = HTTP_401_UNAUTHORIZED
-
-
 class MethodNotAllowedExp(BaseApiExp):
     err_code = ERR_METHOD_NOT_ALLOWED
     status_code = HTTP_405_METHOD_NOT_ALLOWED
@@ -33,7 +28,7 @@ class NotAcceptableExp(BaseApiExp):
     status_code = HTTP_406_NOT_ACCEPTABLE
 
 
-class UserNotAuthenticatedExp(BaseApiExp):
+class UnauthenticatedExp(BaseApiExp):
     err_code = ERR_NOT_AUTHENTICATED
     status_code = HTTP_401_UNAUTHORIZED
 
@@ -51,11 +46,6 @@ class PemissionDeniedExp(BaseApiExp):
 class UnsupportedMediaExp(BaseApiExp):
     err_code = ERR_UNSUPPORTED_MEDIA
     status_code = HTTP_415_UNSUPPORTED_MEDIA_TYPE
-
-
-class UserInactiveExp(BaseApiExp):
-    err_code = ERR_USER_IS_INACTIVE
-    status_code = HTTP_401_UNAUTHORIZED
 
 
 class ValidationErrorExp(BaseApiExp):
