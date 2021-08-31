@@ -1,7 +1,7 @@
 from rest_framework.viewsets import GenericViewSet
 from ..paginations import DefaultPagination
 from .mixins import CreateMixin, RetrieveMixin, UpdateMixin, ListMixin, DestroyMixin
-
+from ..exceptions.apis import AuthenticationFailedExp, PemissionDeniedExp
 
 class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListMixin, DestroyMixin):
     serializer_action_classes = {}
@@ -9,12 +9,6 @@ class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListM
     page_size = 10
     page_result_key = None
     pagination_class = DefaultPagination
-
-    def _get_request_access_token(self, request):
-        current_token = request.headers.get('Authorization', None)
-        if current_token != None:
-            current_token = current_token.split(' ')[1]
-        return current_token
 
     def get_serializer_class(self, *args, **kwargs):
         try:
@@ -50,3 +44,9 @@ class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListM
             return qs
         else:
             return super().get_queryset()
+
+    def permission_denied(self, request, message=None, code=None):
+        if request.authenticators and not request.successful_authenticator:
+            raise AuthenticationFailedExp('Unauthenticated')
+        raise PemissionDeniedExp('Permission Denied')
+
