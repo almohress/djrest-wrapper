@@ -7,7 +7,6 @@ class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListM
     serializer_action_classes = {}
     permission_action_classes = {}
     page_size = 10
-    page_result_key = None
     pagination_class = DefaultPagination
 
     def get_serializer_class(self, *args, **kwargs):
@@ -35,7 +34,7 @@ class BaseViewSet(GenericViewSet, CreateMixin, RetrieveMixin, UpdateMixin, ListM
             else:
                 self._paginator = self.pagination_class()
                 self._paginator.page_size = self.page_size
-                self._paginator.page_result_key = self.page_result_key
+                self._paginator.page_result_key = self.queryset.model._meta.verbose_name_plural
         return self._paginator
 
     def get_queryset(self):
