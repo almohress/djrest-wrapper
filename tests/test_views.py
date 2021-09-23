@@ -38,6 +38,23 @@ class ExampleAPITestCase(APITestCase):
         self.assertEqual(response.json().get('err_code'),
                          errors.ERR_INPUT_VALIDATION)
 
+    def test_create_example_failure_duplicate(self):
+        data = {
+            'text': 'sometest',
+            'some_unique_field': 'this is unique',
+        }
+        ExampleModel.objects.create(**data)
+        url = reverse('example-list')
+        response = self.client.post(path=url, data=data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        self.assertEqual(response.json().get('err'), True)
+
+        self.assertEqual(response.json().get('err_code'),
+                         errors.ERR_INPUT_VALIDATION)
+        self.assertIsNone(response.json())
+
     def test_list_example(self):
         for i in range(20):
             ExampleModel.objects.create(text=f'model number {i}')

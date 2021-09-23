@@ -1,15 +1,15 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import ExampleModel
 
 
-class ExmapleReqSerializer(serializers.ModelSerializer):
+class ExmapleReqSerializer(ModelSerializer):
     class Meta:
         model = ExampleModel
         fields = '__all__'
         execlude = ['id']
 
 
-class ExampleResSerializer(serializers.ModelSerializer):
+class ExampleResSerializer(ModelSerializer):
     class Meta:
         model = ExampleModel
         fields = '__all__'
