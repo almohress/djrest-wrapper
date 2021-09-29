@@ -56,3 +56,8 @@ class ValidationErrorExp(BaseApiExp):
 class ConflictErrorExp(BaseApiExp):
     err_code = ERR_CONFLICT
     status_code = HTTP_409_CONFLICT
+
+
+class InternalError(BaseApiExp):
+    err_code = ERR_INTERNAL
+    status_code = HTTP_500_INTERNAL_SERVER_ERROR
